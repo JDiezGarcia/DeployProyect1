@@ -1,6 +1,7 @@
 #!/bin/bash
 
 busqueda=`find  -name "*" -exec grep -r -l -I "[á,à,â,é,è,ê,í,ì,î,ó,ò,ô,ú,ù,û]" {} \;`;
+eslint=`eslint '*.html'`
 
 if [ -z $busqueda ];then
 	echo "Toda ha salido bien";
@@ -8,5 +9,14 @@ if [ -z $busqueda ];then
 else
 	echo "Se han encontrado archivos con palabra mal sonante";
 	printf "$busqueda\n";
+	exit 1;
+fi
+
+if [ -z $eslint ];then
+	echo "Todos los HTML bien formateados";
+	exit 0;
+else
+	echo "Se han encontrado archivos HTML mas formateados";
+	printf "$elsint\n";
 	exit 1;
 fi
